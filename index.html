@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <title>TIIDE LAB Login</title>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="flex-container">
+              <div class="row full">
+              <div class="col-md-12">
+                <div class="form-container">
+                          <div class="form-container-in">
+                  </div>
+                  <div class="log-container">
+                    <div class="para">
+                      <p class="lead mg"> <h1>WELCOME TO TIIDE</h1></p>
+                    </div>
+                </div>
+                  
+                  <div class="row">
+                    
+                    <div class="col-md-6">
+                      <h3 class="lead-text"> Join Us with social media </h3>
+                        <div id="social-platforms">
+                          <div class="media-container">
+                            <a class="btnn btnn-icon btnn-facebook" href="#"><i class="fa fa-facebook">                           </i><span>Facebook</span></a>
+                          </div>
+                          <div class="media-container">
+                             <a class="btnn btnn-icon btnn-google" href="#"><i class="fa fa-google">
+                        </i><span>Google+</span></a>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="left-divider"></div>
+                    <div class="col-md-6">
+                      <form v-show="!submitted"  action="#">
+                     <div class="form-group">
+                    <label for="fname">First Name :</label>
+                    <input v-model="firstname" id="fname" type="text" class="form-control" required>
+                  </div>
+                     <div class="form-group">
+                    <label for="lname">Last Name :</label>
+                    <input v-model="lastname" id="lname" type="text" class="form-control"required>
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="inputGroupSelect01">Gender</label>
+                    </div>
+                    <select v-model="gend" class="custom-select" id="inputGroupSelect01" required>
+                      <option selected disabled>Choose...</option>
+                      <option v-for="gender in genders" :key="gender" v-model='gend'> {{ gender }}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="email" >Email :</label>
+                    <input v-model.lazy="email" id="email" type="text" class="form-control" required>
+                  </div>
+                    <div class="form-group">
+                    <label for="password">Password :</label>
+                    <input id="password" type="password" class="form-control" required>
+                  </div>
+                        <div class="form-group">
+                          <input @click="show" type="submit" value="submit" class="btn-primary btnn form-submit"></input>
+                        </div>
+                </form>
+                <div v-if="submitted">
+                  <h3>
+                    Thanks for signing up
+                  </h3>
+                </div>
+                <div class="preview">
+                    <h3>Sign up preview</h3>
+                    <p v-model="firstname">First Name:{{ firstname }}</p>
+                    <p v-model="lastname">Last Name:{{lastname }}</p>
+                    <p>Gender: {{ gend }} </p>
+                    <p v-model="email">Email: {{email }}</p>
+                </div>
+                    </div>
+                  </div>  
+                  </div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>        
+    <script>
+new Vue ({
+    el: '#app',
+    data () {
+        return {
+            firstname: null,
+            lastname: null,
+            email: null,
+            showemail: null,
+            showpass: null,
+            gend: null,
+            genders: ['Male', 'Female'],
+            submitted: false,
+            errors: []
+        }
+    },
+    methods: {
+        checkForm: function (e) {
+        if (this.firstname && this.lastname && this.gend && this.email && this.password) {
+          return true;
+        }
+
+        this.errors = [];
+
+        if (!this.firstname) {
+          this.errors.push('FIrst Name required.');
+        }
+        if (!this.lastname) {
+          this.errors.push('Last name required.');
+        }
+
+        e.preventDefault();
+      },
+        show () {
+            this.submitted = true
+        }
+    }
+})
+    </script>   
+</body>
+</html>
